@@ -1,6 +1,6 @@
 # Character Creator
 
-# Bootstrapper Development NOtes
+# Bootstrapper Development Notes
 
 ## Overview
 
@@ -16,6 +16,10 @@ This character creator will be made in a modular fashion with the following stru
     * Player Name Functionality (gets a random player name)
     * NFT Module & Service (...)
 
+### React UI Front-End
+
+Overall Requirements
+* The UI must have dynamic controls and inputs defined by passed in parameters. This is to allow for different rigs as well as modules to offer different options.
 
 ## Reference
 
