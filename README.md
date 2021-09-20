@@ -10,13 +10,17 @@ This character creator will be made in a modular fashion with the following stru
 
 * React UI Front-End
 * Three.JS Display and Editor
+  * Adjust avatar mesh (https://youtu.be/R5Wv10psM4c)
+  * Add textures to models and customize them (https://youtu.be/8hANSLtLDXs)
 * Back-End Processing Modules
-  * Export to [VRM](https://github.com/vrm-c/vrm-specification/tree/master/specification)
+  * glTF Model Importing
+  * Import & Export to [VRM](https://github.com/vrm-c/vrm-specification/tree/master/specification)
 * Plugins
   * MSA Module
     * Player Stats Module (generates a player look and stats based on varying factors involving rarity)
     * Player Name Functionality (gets a random player name)
     * NFT Module & Service (...)
+  
 
 ### React UI Front-End
 
