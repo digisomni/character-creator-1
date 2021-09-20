@@ -1,4 +1,4 @@
-# character-creator
+# Character Creator
 
 # Bootstrapper Development NOtes
 
