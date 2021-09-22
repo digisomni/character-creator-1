@@ -46,19 +46,10 @@ class Buttons extends Component<any, State> {
           id="download"
           onClick={() => {
             (window as any).export((this.props as any).characterName);
-            ReactGA.event({
-              category: "MMF-Hero",
-              action: "Download as STL"
-            });
             for (const key in (this.props as any).loadedMeshes) {
               // check if the property/key is defined in the object itself, not in parent
               if ((this.props as any).loadedMeshes.hasOwnProperty(key)) {           
                   // console.log(key, this.props.loadedMeshes[key]);
-ReactGA.event({
-    category: "MMF-Hero",
-    action: key,
-    label: (this.props as any).loadedMeshes[key]
-});
               }
             }
           }}

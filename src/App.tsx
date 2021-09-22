@@ -20,7 +20,6 @@ import "./css/master.css";
 import data from "./library/category.json";
 
 // Loading the different components
-import Name from "./components/Name";
 import Category from "./components/Category";
 import Buttons from "./components/Buttons";
 import Popup from "./components/Popup";
@@ -84,21 +83,11 @@ class App extends Component<any, State> {
     this.setState({ message });
   };
 
-  componentDidMount() {
-    // Google Analytics for the page
-    ReactGA.initialize("UA-41837285-1");
-    ReactGA.pageview("/mmf-hero");
-  }
-
   render() {
     return (
       <div>
         <BrowserView>
           <PageLoader />
-          <Name
-            characterName={this.state.characterName}
-            updateCharacterName={this.updateCharacterName}
-          />
           <Buttons
             characterName={this.state.characterName}
             updatePopup={this.updatePopup}
