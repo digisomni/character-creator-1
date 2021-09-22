@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from './../graphic_assets/logo.jpg';
 
 // Loading Assets (SubComponents & CSS)
 import "../css/postform.css";
-// @ts-expect-error ts-migrate(6142) FIXME: Module './Loader' was resolved to '/home/beast/Doc... Remove this comment to see the full error message
 import Loader from "./Loader";
-// @ts-expect-error ts-migrate(6142) FIXME: Module './Response' was resolved to '/home/beast/D... Remove this comment to see the full error message
 import Response from "./Response";
 
 type State = any;
 
-class PostForm extends Component<{}, State> {
-  constructor(props: {}) {
+class PostForm extends Component<any, State> {
+  constructor(props: any) {
     super(props);
     this.state = {
       name: "MyCharacter",
@@ -29,8 +26,7 @@ class PostForm extends Component<{}, State> {
     (this.props as any).updateVisible(false);
     this.setState({ loader: true });
     const accesstoken = (this.props as any).accesstoken;
-    // @ts-expect-error ts-migrate(2551) FIXME: Property 'export' does not exist on type 'Window &... Remove this comment to see the full error message
-    const stlData = window.export();
+    const stlData = (window as any).export();
     axios({
       method: "post",
       url: "https://www.myminifactory.com/api/v2/object",
@@ -97,43 +93,26 @@ class PostForm extends Component<{}, State> {
   renderForm() {
     if ((this.props as any).visible) {
       return (
-        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className="screen abs top left">
-          {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
           <div className="abs popup">
-            {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
-            <FontAwesomeIcon
-              className="abs cross"
-              icon="times-circle"
-              // @ts-expect-error ts-migrate(2322) FIXME: Type '{ className: string; icon: "times-circle"; o... Remove this comment to see the full error message
-              onClick={() => {
+              {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+               {/* @ts-ignore */}
+            <FontAwesomeIcon className="abs cross" icon="times-circle" onClick={() => {
                 (this.props as any).updateVisible(false);
               }}
             />
-            {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
-            <div className="logotopform">
-              {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
-              <img src={logo} alt="logo"/>
-            </div>
-            {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <div className="title">
-              {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
               <h2>Upload to MyMiniFactory</h2>
             </div>
-            {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <form className="form" onSubmit={this.handleSubmit}>
-              {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
               <p>Give it a name:</p>
-              {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
               <input
                 className="nameinput"
                   type="text"
                   value={this.state.name}
                   onChange={this.handleInputChange}
                 />
-              {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
               <div className="submit-container">
-                {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
                 <input className="buttons" type="submit" value="Submit" />
               </div>
               
@@ -147,12 +126,9 @@ class PostForm extends Component<{}, State> {
 
   render() {
     return (
-      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <div>
         {this.renderForm()}
-        {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <Loader visible={this.state.loader} />
-        {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <Response visible={this.state.response} status={this.state.status}  />
       </div>
     );

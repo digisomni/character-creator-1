@@ -5,9 +5,22 @@
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+
+  <script src="js/vendor/three/three.js" charset="utf-8"></script>
+  <script src="js/vendor/three/controls/OrbitControls.js" charset="utf-8"></script>
+  <script src="js/vendor/three/loaders/GLTFLoader.js" charset="utf-8"></script>
+  <script src="js/vendor/three/loaders/STLLoader.js" charset="utf-8"></script>
+  <script src="js/vendor/three/exporters/STLExporter.js" charset="utf-8"></script>
+  <script src="js/vendor/three/exporters/STLExporterArray.js" charset="utf-8"></script>
+
+  <script src="js/FindMinGeometry.js" charset="utf-8"></script>
   </head>
   <body>
+    <div id="canvas"></div>
+
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/index.tsx"></script>
+    <script src="js/skeleton.js" charsset="utf-8"></script>
+
   </body>
 </html>

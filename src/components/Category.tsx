@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 
 // Loading Assets (SubComponents & CSS)
-// @ts-expect-error ts-migrate(6142) FIXME: Module './Selector' was resolved to '/home/beast/D... Remove this comment to see the full error message
 import Selector from "./Selector";
 import "../css/category.css";
 
 type State = any;
 
-class Category extends Component<{}, State> {
-	constructor(props: {}) {
+class Category extends Component<any, State> {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 			isLeft: true
@@ -16,8 +15,7 @@ class Category extends Component<{}, State> {
 	}
 
 	// Update the state of parent App from child Component
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'isLeft' implicitly has an 'any' type.
-	updateLeft = isLeft => {
+	updateLeft = (isLeft: any) => {
 		this.setState({ isLeft });
 	};
 
@@ -34,15 +32,12 @@ const category = (this.props as any).category;
 			const file = category[i].imgfile;
 			if (name === current) {
 				categoryDiv.push(
-// @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="category selected-category" key={i}>
-{/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
 						<img src={"img/graphics_creation/" + file} alt={name} />
 					</div>
 				);
 			} else {
 				categoryDiv.push(
-// @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div
 						className="category"
 						key={i}
@@ -90,7 +85,6 @@ const category = (this.props as any).category;
 							}
 						}}
 					>
-{/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
 						<img src={"img/graphics_creation/" + file} alt={name} />
 					</div>
 				);
@@ -98,19 +92,15 @@ const category = (this.props as any).category;
 		}
 
 		if ((this.props as any).UIDisplayed) {
-// @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			return (<div className="abs top right panel">
-{/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
 					<div className="abs top left left-side unselectable">
 						{categoryDiv}
 					</div>
-{/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
 					<Selector currentCategory={(this.props as any).currentCategory} isLeft={this.state.isLeft} updateLeft={this.updateLeft} 
 // updatePose={this.props.updatePose}
 loadedMeshes={(this.props as any).loadedMeshes} updateMeshes={(this.props as any).updateMeshes} updatePopup={(this.props as any).updatePopup} updatePopupMessage={(this.props as any).updatePopupMessage} editor={(this.props as any).editor} updateLoading={(this.props as any).updateLoading}/>
 				</div>);
 		} else {
-// @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			return <div />;
 		}
 	}
