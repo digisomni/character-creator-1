@@ -45,7 +45,9 @@ class Buttons extends Component<any, State> {
           className="abs buttons"
           id="download"
           onClick={() => {
-            (window as any).export((this.props as any).characterName);
+            //(window as any).export((this.props as any).characterName);
+            (window as any).exportGLTF((this.props as any).characterName);
+
             for (const key in (this.props as any).loadedMeshes) {
               // check if the property/key is defined in the object itself, not in parent
               if ((this.props as any).loadedMeshes.hasOwnProperty(key)) {           
@@ -54,7 +56,7 @@ class Buttons extends Component<any, State> {
             }
           }}
         >
-          Download STL file
+          Download gltf file
         </div>
         <PostForm
           visible={this.state.formVisible}
