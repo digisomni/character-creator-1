@@ -597,6 +597,27 @@ window.loadPose = function(poseData, bones) {
     }
   }
 };
+window.exportGLTF = function(name) {
+  // Instantiate a exporter
+  const exporter = new THREE.GLTFExporter();
+
+  // Parse the input and generate the glTF output
+  exporter.parse( group, function ( gltf ) {
+    console.log(JSON.stringify(gltf));
+    saveString(JSON.stringify(gltf),name + ".gltf");
+  }, {
+      binary: false,
+      trs: false,
+      onlyVisible: true,
+      truncateDrawRange: true,
+      embedImages: true,
+      animations: [],
+      forceIndices: false,
+      forcePowerOfTwoTextures: false
+    }
+  );
+}
+
 window.export = function(name) {
   var exporter = new THREE.STLExporter();
 
