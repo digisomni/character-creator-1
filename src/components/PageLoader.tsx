@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import $ from "jquery";
-import '../css/loader.css'
+import React, { Component } from "react";
+import "../css/loader.css";
 
 type State = any;
 
@@ -15,7 +14,11 @@ class PageLoader extends Component<any, State> {
     }
 
     componentDidMount() {
-        $('.graybackground').css('visibility', 'hidden')
+        const element = document.querySelector<HTMLElement>(".graybackground")!;
+        if (element !== null) {
+            element.style.visibility = "hidden";
+        }
+
         this.check = setInterval(() => {
             if ((window as any).loaded) {
                 clearInterval(this.check)
