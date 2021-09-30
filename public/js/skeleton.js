@@ -20,11 +20,11 @@ window.partloaded = false;
 //This keeps track of every mesh on the viewport
 var loadedMeshes = {
   Torso: {
-    name: "turtle_torso",
+    name: "default_torso",
     rotation: { x: 0, y: 0, z: 0 }
   },
   LegR: {
-    name: "robot_leg_R",
+    name: "default_leg_R",
     rotation: { x: 0, y: 0, z: 0 }
   },
   LegL: {
@@ -52,11 +52,11 @@ var loadedMeshes = {
     rotation: { x: 0, y: 1.57, z: 0 }
   },
   FootR: {
-    name: "boots_R",
+    name: "default_foot_R",
     rotation: { x: 0, y: 0, z: 0 }
   },
   FootL: {
-    name: "boots_L",
+    name: "default_foot_L",
     rotation: { x: 0, y: 0, z: 0 }
   },
   Stand: {
@@ -136,8 +136,16 @@ function init() {
   "use strict";
 
   scene = new THREE.Scene();
-  loader = new THREE.GLTFLoader();
+  scene.loaded = false;
+  
+  const manager = new THREE.LoadingManager();
+  manager.onLoad = function ( ) {
+    scene.loaded = true;
+  };
+
+  loader = new THREE.GLTFLoader( manager );
   // fogColor = new THREE.Color(0xffffff);
+
 
   scene.background = new THREE.Color(0xeeeeee);
   scene.fog = new THREE.Fog(0xeeeeee, 1, 20);
@@ -176,8 +184,8 @@ function init() {
     // Append Renderer to DOM
     container.appendChild(renderer.domElement);
 
-    var size = 50;
-    var divisions = 60;
+    var size = 20;
+    var divisions = 30;
 
     var gridHelper = new THREE.GridHelper(size, divisions);
     scene.add(gridHelper);
@@ -272,7 +280,6 @@ function placeMesh(
           child.material.color = { r: 0.5, g: 0.5, b: 0.5 };
         }
       });
-
       // group is one element with all the meshes and bones of the character
       group.add(root);
       scene.updateMatrixWorld(true);
