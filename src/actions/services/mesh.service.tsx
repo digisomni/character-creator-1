@@ -9,7 +9,12 @@ export const meshService = {
   getMeshType,
   setDefaultBoneRotations,
   getBoneRotation,
+  lodcontrol
 };
+
+async function lodcontrol (updateMesh){
+  <LodMain/>
+}
 
 async function initialLoad(bones) {
   await axios.get("models/poses/default.json").then((res) => {

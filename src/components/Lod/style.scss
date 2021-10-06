@@ -1,0 +1,27 @@
+@import "../../assets/styles/colors";
+
+.lod-wrap {
+    position : absolute ;
+    top : 20px;
+    right : 20px;
+    z-index: 10;
+    .btn {
+        padding : 10 !important;
+    }
+    .expand-load{
+        background: $NavMainBackgroundColor;
+        cursor : pointer;
+    }
+}
+
+.nav-item {
+    background-color: #ffffff !important;
+    margin-top : 4px !important;
+    &:first-child{
+        margin-top: 12px !important;
+    }
+}
+
+.btn{
+    background-color: $NavMainBackgroundColor;
+}

@@ -4,12 +4,14 @@ import { BrowserView, MobileView } from "react-device-detect";
 import Typed from "react-typed";
 import MeshSelector from "../../components/MeshEditor";
 import DownloadCharacter from "../Download";
+import Lod from "../../components/Lod";
 
 export default function CharecterEditor() {
   return (
     <div>
       <BrowserView>
         <MeshSelector />
+        <Lod />
         <DownloadCharacter />
       </BrowserView>
       <MobileView>
