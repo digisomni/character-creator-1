@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import { BrowserView, MobileView } from "react-device-detect";
 import Typed from "react-typed";
-import MeshSelector from "../../components/MeshEditor";
+import MeshSelector from "../Editor";
 import DownloadCharacter from "../Download";
 
 export default function CharecterEditor() {

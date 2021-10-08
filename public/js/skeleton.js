@@ -11,7 +11,7 @@ var camera, scene, renderer;
 var controls, loader;
 
 var selected = "Head";
-var color = { r: 0.555, g: 0.48, b: 0.49 };
+var color = { r: 0.200, g: 0.48, b: 0.49 };
 var group = new THREE.Group(); //this group will contain all the meshes but not the floor, the lights etc...
 var bBoxStand;
 window.loaded = false;
@@ -147,8 +147,8 @@ function init() {
   // fogColor = new THREE.Color(0xffffff);
 
 
-  scene.background = new THREE.Color(0xeeeeee);
-  scene.fog = new THREE.Fog(0xeeeeee, 1, 20);
+  scene.background = new THREE.Color(0x002c4a);
+  scene.fog = new THREE.Fog(0x003b63, 1, 20);
 
   scene.add(group);
 
@@ -184,10 +184,10 @@ function init() {
     // Append Renderer to DOM
     container.appendChild(renderer.domElement);
 
-    var size = 20;
-    var divisions = 30;
+    var size = 800;
+    var divisions = 600;
 
-    var gridHelper = new THREE.GridHelper(size, divisions);
+    var gridHelper = new THREE.GridHelper(size, divisions, 0x003b63, 0x003b63);
     scene.add(gridHelper);
   }
   function buildControls() {

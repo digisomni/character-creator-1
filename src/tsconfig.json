@@ -5,7 +5,7 @@
 
     /* Basic Options */
     // "incremental": true,
-    "module": "esnext",
+    "module": "ESNext",
     "target": "es2020",                        /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
     // "lib": [],                                   /* Specify library files to be included in the compilation. */
     "allowJs": true,                             /* Allow javascript files to be compiled. */
@@ -26,8 +26,8 @@
     // "isolatedModules": true,                     /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
 
     /* Strict Type-Checking Options */
-    "strict": true,                                 /* Enable all strict type-checking options. */
-    "noImplicitAny": false,                       /* Raise error on expressions and declarations with an implied 'any' type. */
+    "strict": false,                                 /* Enable all strict type-checking options. */
+    "noImplicitAny": false,                         /* Raise error on expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": true,                    /* Enable strict null checks. */
     // "strictFunctionTypes": true,                 /* Enable strict checking of function types. */
     // "strictBindCallApply": true,                 /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
@@ -71,6 +71,6 @@
     "forceConsistentCasingInFileNames": true ,
     "removeComments": false,
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   }
 }
