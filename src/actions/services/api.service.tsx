@@ -4,7 +4,9 @@
 import axios from "axios";
 
 // IMPORT LOCAL DATA FOR TESTING
-import CategoryData from "../../library/category.json";
+import BaseCategories from "../../data/base/categories.json";
+import TemplateCategories from "../../data/template/categories.json";
+
 import headElements from "../../library/heads.json";
 import handElements from "../../library/hands.json";
 import armElements from "../../library/arm.json";
@@ -22,8 +24,12 @@ export const apiService = {
   filterElements,
 };
 
-async function fetchCaterories() {
-  return CategoryData;
+async function fetchCaterories(editor: any) {
+  if (editor && editor === "base") {
+    return BaseCategories;
+  } else if (editor && editor === "template") {
+    return TemplateCategories;
+  }
 }
 
 async function fetchBones() {

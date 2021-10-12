@@ -32,7 +32,7 @@ export default function MeshSelector() {
   };
 
   return (
-    <Box className="mesh-selector-wrap">
+    <div className="mesh-selector-wrap">
       <nav aria-label="main category selector">
         <List className="categories-wrap">
           {categories &&
@@ -58,6 +58,6 @@ export default function MeshSelector() {
         </List>
       </nav>
       <Selector />
-    </Box>
+    </div>
   );
 }

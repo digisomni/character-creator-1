@@ -83,7 +83,7 @@ export default function Selector() {
   };
 
   return (
-    <Box className="selector-wrap">
+    <div className="selector-wrap">
       <Grid container spacing={2} className="title-wrap">
         <Grid item xs={8} p="0">
           <h2>
@@ -186,6 +186,6 @@ export default function Selector() {
           </Grid>
         </Scrollbars>
       )}
-    </Box>
+    </div>
   );
 }

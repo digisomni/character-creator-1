@@ -4,15 +4,25 @@
     height: calc(100vh - 65px) !important;
     width: calc(100vw - 241px) !important;
     &.base {
-        height: 100vh !important;
         width: calc(100vw - 321px) !important;
     }
     &.template {
-        height: 100vh !important;
-        width: calc(100vw - 321px) !important;
+        width: calc(100vw - 373px) !important;
     }
     position: absolute;
     right: 0;
     top: 65px;
-    z-index: 10;
+    z-index: 0;
+    .scene-tools {
+        padding:24px; 
+        background: #333333;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: -50px;
+        z-index: 101;
+        .slider {
+            height: 100px !important;
+        }
+    }
 }

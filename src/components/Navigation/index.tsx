@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import logo from '../../assets/media/logo.svg'
 
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import { useGlobalState } from '../AuthContextWrap';
@@ -88,19 +89,6 @@ export default function Navigation() {
           aria-haspopup="true"
           color="inherit"
         >
-          <VideoCameraFrontIcon />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -116,19 +104,13 @@ export default function Navigation() {
             variant="h6"
             noWrap
             component="div"
+            className="logo"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            Character Creator - {generator && generator !== "" }
+            <img src={logo} height="42px" /> Character Creator
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <VideoCameraFrontIcon />
-            </IconButton>
             <IconButton
               size="large"
               edge="end"

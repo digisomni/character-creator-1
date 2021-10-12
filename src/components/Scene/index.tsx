@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useRef, Suspense, useState } from "react";
-import './style.scss';
+import "./style.scss";
 import * as THREE from "three";
 import Slider from "@mui/material/Slider";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
@@ -13,30 +13,34 @@ import {
 
 import { useGlobalState } from "../GlobalProvider";
 import { TemplateModel } from "./models";
+import { Box } from "@mui/system";
+import { threeService } from "../../actions/services";
 
-export default function Scene(props:any) {
-  const { editor, wrapClass }:any = props;
+export default function Scene(props: any) {
+  const { editor, wrapClass }: any = props;
   const { characterName, modelNodes, scene }: any = useGlobalState();
   const [cvpSlider, setCvpSlider] = React.useState<number>(1);
   return (
     <div className={`scene-wrap ${wrapClass && wrapClass}`}>
-      <Slider
-      sx={{
-        '& input[type="range"]': {
-          WebkitAppearance: "slider-vertical",
-        },
-      }}
-      orientation="vertical"
-      defaultValue={cvpSlider}
-      min={-1}
-      max={2}
-      step={0.1}
-      onChange={(e: any) => {
-        setCvpSlider(e.target.value);
-      }}
-      aria-label="Camera Vertical Position Slider"
-      className="cvp-slider"
-    />
+      <Box className="scene-tools">
+        <Slider
+          sx={{
+            '& input[type="range"]': {
+              WebkitAppearance: "slider-vertical",
+            },
+          }}
+          orientation="vertical"
+          defaultValue={cvpSlider}
+          min={-1}
+          max={2}
+          step={0.1}
+          onChange={(e: any) => {
+            setCvpSlider(e.target.value);
+          }}
+          aria-label="Camera Vertical Position Slider"
+          className="slider"
+        />
+      </Box>
       <Canvas>
         <Text
           color="#efefef"
@@ -68,7 +72,7 @@ export default function Scene(props:any) {
           minPolarAngle={0}
           maxPolarAngle={Math.PI / 2 - 0.1}
           enablePan={false}
-          target={[0,cvpSlider,0]}
+          target={[0, 1, 0]}
         />
         <PerspectiveCamera>
           <TemplateModel nodes={modelNodes} scene={scene} />

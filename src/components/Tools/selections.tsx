@@ -1,5 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import SettingsIcon from '@mui/icons-material/Settings';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Avatar from "@mui/material/Avatar";
@@ -47,6 +48,19 @@ export default function MeshSelector() {
               </ListItem>
             );
           })}
+          <ListItem
+                key={'settings'}
+                onClick={() => changeCategory('settings')}
+                className={
+                  category && category.name === 'settings'
+                    ? "mesh-nav-item active"
+                    : "mesh-nav-item"
+                }
+              >
+                <Avatar className="icons">
+                  <SettingsIcon />
+                </Avatar>
+              </ListItem>
       </List>
   );
 }

@@ -5,45 +5,106 @@ import "./style.scss";
 
 import { useGlobalState } from "../GlobalProvider";
 import { threeService } from "../../actions/services";
+import { Box } from "@mui/system";
 
-export function CameraVerticalPositionSlider(props: any) {
-  const { value, axis, name } = props;
-  const { cvpSlider, setCvpSlider }: any = useGlobalState();
-  return (
-    <Slider
-      sx={{
-        '& input[type="range"]': {
-          WebkitAppearance: "slider-vertical",
-        },
-      }}
-      orientation="vertical"
-      defaultValue={cvpSlider}
-      min={-1}
-      max={2}
-      step={0.1}
-      onChange={(e: any) => {
-        setCvpSlider(e.target.value);
-      }}
-      aria-label="Camera Vertical Position Slider"
-      className="cvp-slider"
-    />
-  );
-}
-
-export function ChangeRotationSlider(props: any) {
-  const { value, axis, name } = props;
+export function XyzPositionSlider(props: any) {
+  const { position, name } = props;
   const { scene }: any = useGlobalState();
+  const [valueX, setValueX] = React.useState<number>(position && position.x);
+  const [valueY, setValueY] = React.useState<number>(position && position.y);
+  const [valueZ, setValueZ] = React.useState<number>(position && position.z);
+  const handleChange = (value: any, axis: any) => {
+    switch (axis) {
+      case "x":
+        setValueX(value);
+        break;
+      case "y":
+        setValueY(value);
+        break;
+      case "z":
+        setValueZ(value);
+        break;
+      default:
+    }
+    threeService.changeBonePosition(name, value, axis, scene);
+  };
   return (
-    <Slider
-      size="small"
-      defaultValue={value}
-      min={-10}
-      max={10}
-      step={0.001}
-      valueLabelDisplay="auto"
-      onChange={(e: any) => {
-        threeService.changeBoneRotation(name, e.target.value, axis, scene);
-      }}
-    />
+    <Box className="xyz-slider-wrap">
+      <Typography variant="h6" className="title">
+        {name}
+      </Typography>
+      <Box>
+        <Slider
+          size="small"
+          className="slider"
+          value={valueX}
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "x");
+          }}
+        />
+        <input
+          value={valueX}
+          className="input"
+          type="number"
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "x");
+          }}
+        />
+      </Box>
+      <Box>
+        <Slider
+          size="small"
+          className="slider"
+          value={valueY}
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "y");
+          }}
+        />
+        <input
+          value={valueY}
+          className="input"
+          type="number"
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "y");
+          }}
+        />
+      </Box>
+      <Box>
+        <Slider
+          size="small"
+          className="slider"
+          value={valueZ}
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "z");
+          }}
+        />
+        <input
+          value={valueZ}
+          className="input"
+          type="number"
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "z");
+          }}
+        />
+      </Box>
+    </Box>
   );
 }

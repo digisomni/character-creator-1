@@ -43,6 +43,8 @@ export const GPRoute = ({ component: Component, ...rest }) => {
     "/models/TestModel.glb"
   );
 
+  console.log(nodes);
+
   React.useEffect(() => {
     if (nodes) {
       setModelNodes(nodes);

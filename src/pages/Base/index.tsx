@@ -8,7 +8,7 @@ export default function Base() {
   const { setCategories, setCategoriesLoaded }: any = useGlobalState();
   // Loading Categories
   React.useEffect(() => {
-    apiService.fetchCaterories().then((res) => {
+    apiService.fetchCaterories('base').then((res) => {
       setCategories(res);
       setCategoriesLoaded(true);
     });
