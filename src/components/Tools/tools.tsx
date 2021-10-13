@@ -48,7 +48,7 @@ export function MorphUpdateTools() {
             size="small"
             min={0}
             max={1}
-            step={0.01}
+            step={0.05}
             onChange={(e: any) => {
               updateMorph(e.target.value, "Chubby");
             }}
@@ -76,6 +76,21 @@ export function MorphUpdateTools() {
             }}
           />
       </Typography>
+    </AccordionDetails>
+  </Accordion>
+  <Accordion className="options-box">
+    <AccordionSummary
+      expandIcon={<ExpandMoreIcon />}
+      aria-controls="panel1a-content"
+      id="panel1a-header"
+    >
+      <Typography>Skin Editor</Typography>
+    </AccordionSummary>
+    <AccordionDetails>
+    <Scrollbars className="scroll">
+      <Typography>
+      </Typography>
+      </Scrollbars>
     </AccordionDetails>
   </Accordion>
   <Accordion className="options-box">

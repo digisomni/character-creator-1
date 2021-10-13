@@ -42,14 +42,15 @@ export default function Scene(props: any) {
         />
       </Box>
       <Canvas>
-        <Text
+        { /* <Text
           color="#efefef"
           anchorX="center"
           anchorY="middle"
           position={[0, 2, 0]}
-        >
+        > 
           {characterName}
         </Text>
+        */}
         <color attach="background" args={["#0f1321"]} />
         <gridHelper
           args={[200, 100, "#002459", "#002459"]}

@@ -5,6 +5,7 @@ import * as THREE from "three";
 import {
   useGLTF,
 } from "@react-three/drei";
+import { apiService } from "../../actions/services";
 
 const GlobalContext = React.createContext({});
 
@@ -38,6 +39,7 @@ export const GPRoute = ({ component: Component, ...rest }) => {
 
   // 3D Model Content State Hooks ( Scene, Nodes, Materials, Animations e.t.c ) //
   const [modelNodes, setModelNodes] = React.useState<object>(Object);
+  const [template, setTemplate] = React.useState<object>(Object);
 
   const { nodes, scene, materials, animations }: any = useGLTF(
     "/models/TestModel.glb"
@@ -48,6 +50,10 @@ export const GPRoute = ({ component: Component, ...rest }) => {
   React.useEffect(() => {
     if (nodes) {
       setModelNodes(nodes);
+      apiService.fetchTemplate().then((res) => {
+        setTemplate(res);
+        console.log(res);
+      })
     }
   }, [nodes]);
 

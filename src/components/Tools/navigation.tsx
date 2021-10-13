@@ -5,6 +5,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Avatar from "@mui/material/Avatar";
 import { Scrollbars } from "react-custom-scrollbars";
+import DownloadIcon from '@mui/icons-material/Download';
 
 // Importing icons from MUI
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -34,6 +35,13 @@ export default function ToolsNavigation() {
         <Tooltip title="Body" arrow placement="right">
           <Avatar className="avatar active">
             <SettingsAccessibilityIcon />
+          </Avatar>
+        </Tooltip>
+      </ListItem>
+      <ListItem key={"settings2"}>
+        <Tooltip title="Download" arrow placement="right">
+          <Avatar className="avatar">
+            <DownloadIcon />
           </Avatar>
         </Tooltip>
       </ListItem>

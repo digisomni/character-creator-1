@@ -17,11 +17,15 @@ import standElements from "../../library/stands.json";
 import poseElements from "../../library/poses.json";
 import bones from "../../library/bones.json";
 
+// Fetch Template Info for Basketball Player
+import BasketballPlayerTemplate from "../../data/template/player.json";
+
 export const apiService = {
   fetchCaterories,
   fetchElements,
   fetchBones,
   filterElements,
+  fetchTemplate
 };
 
 async function fetchCaterories(editor: any) {
@@ -30,6 +34,10 @@ async function fetchCaterories(editor: any) {
   } else if (editor && editor === "template") {
     return TemplateCategories;
   }
+}
+
+async function fetchTemplate() {
+  return BasketballPlayerTemplate;
 }
 
 async function fetchBones() {

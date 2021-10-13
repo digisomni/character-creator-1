@@ -31,6 +31,28 @@ export function BaseModel(props: any) {
 
 export function TemplateModel(props: any) {
   const { nodes, scene }: any = props;
+
+  const models =
+    nodes &&
+    Object.keys(nodes).map((keyName, i) => {
+      if (nodes[keyName] && nodes[keyName].type !== 'bone') {
+        return (
+          <mesh
+            key={i}
+            geometry={nodes[keyName]?.geometry}
+            position={nodes[keyName]?.position}
+            material={nodes[keyName]?.material}
+            name={nodes[keyName]?.name}
+            morphTargetDictionary={nodes[keyName]?.morphTargetDictionary}
+            morphTargetInfluences={[1,1,1,1,1,1,1,1,1,1,1,1,1,1]}
+          >
+            <bufferGeometry attach="geometry" {...nodes[keyName]?.geometry} />
+          </mesh>
+        );
+      } else {
+        return null;
+      }
+    });
   return (
     <mesh position={[0, 0.02, 0]}>
       <primitive object={scene} morphTargets />

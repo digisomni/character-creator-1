@@ -22,8 +22,9 @@
     .avatar {
       background: none;
       border: 1px solid $NavMainBackgroundColor;
-      padding: 4px;
-      margin: 0;
+      padding: 0px;
+      margin: 0 0 0 2px;
+      margin-bottom: 2px;
       cursor: pointer;
       color: $NavMainBackgroundColor;
       &:hover {
@@ -140,11 +141,11 @@
   }
 }
 .scroll {
-  height: 200px !important;
+  height: 300px !important;
 }
 .options-box {
   background: none !important;
-  margin-top: 6px !important;
+  margin: 10px 0px !important;
   border: 1px solid $NavMainBackgroundColor;
   * {
     color: $NavMainBackgroundColor2 !important;
@@ -153,13 +154,33 @@
 
 .MuiTabs-indicator {
   height: 10px !important;
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0f1321+0,007cce+100 */
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0f1321+0,0f1321+15,0f1321+24,0f1321+31,007cce+100 */
-background: #0f1321; /* Old browsers */
-background: -moz-linear-gradient(top, #0f1321 0%, #0f1321 15%, #0f1321 24%, #0f1321 31%, #007cce 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, #0f1321 0%,#0f1321 15%,#0f1321 24%,#0f1321 31%,#007cce 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, #0f1321 0%,#0f1321 15%,#0f1321 24%,#0f1321 31%,#007cce 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f1321', endColorstr='#007cce',GradientType=0 ); /* IE6-9 */display: block !important;
+  background: #007cce; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #0f1321 0%,
+    #0f1321 15%,
+    #0f1321 24%,
+    #0f1321 31%,
+    #007cce 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #0f1321 0%,
+    #0f1321 15%,
+    #0f1321 24%,
+    #0f1321 31%,
+    #007cce 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #0f1321 0%,
+    #0f1321 15%,
+    #0f1321 24%,
+    #0f1321 31%,
+    #007cce 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f1321', endColorstr='#007cce',GradientType=0 ); /* IE6-9 */
+  display: block !important;
   overflow: hidden !important;
   display: block;
   &::before {
@@ -172,7 +193,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f1321', end
     position: absolute;
     top: 0px;
     left: 0px;
-    border-color:  $BodyMainBackgroundColor transparent transparent transparent;
+    border-color: $BodyMainBackgroundColor transparent transparent transparent;
   }
   &::after {
     width: 0;
@@ -189,7 +210,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f1321', end
 }
 
 .options-tab {
-  margin-top: 4px;
+  margin-top: 4px 3px;
   color: $NavMainBackgroundColor2 !important;
   opacity: 0.6;
   &.Mui-selected {
@@ -198,6 +219,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f1321', end
 }
 
 .css-1kt0o6l {
+  margin-top: 2px;
   border: 0;
   border-bottom: 0px solid $NavMainBackgroundColor !important;
 }

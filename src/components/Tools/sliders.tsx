@@ -108,3 +108,45 @@ export function XyzPositionSlider(props: any) {
     </Box>
   );
 }
+
+
+export function SingleSlider(props: any) {
+  const { position, name } = props;
+  const { scene }: any = useGlobalState();
+  const [value, setValue] = React.useState<number>(position && position.x);
+  const handleChange = (value: any, axis: any) => {
+    setValue(value);
+    threeService.changeBonePosition(name, value, axis, scene);
+  };
+  return (
+    <Box className="single-slider-wrap">
+      <Typography variant="h6" className="title">
+        {name}
+      </Typography>
+      <Box>
+        <Slider
+          size="small"
+          className="slider"
+          value={value}
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "x");
+          }}
+        />
+        <input
+          value={value}
+          className="input"
+          type="number"
+          min={-10}
+          max={10}
+          step={0.001}
+          onChange={(e: any) => {
+            handleChange(e.target.value, "x");
+          }}
+        />
+      </Box>
+    </Box>
+  );
+}
