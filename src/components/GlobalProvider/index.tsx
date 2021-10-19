@@ -1,10 +1,6 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
-// import { meshService, apiService } from "../../actions/services";
-import * as THREE from "three";
-import {
-  useGLTF,
-} from "@react-three/drei";
+import { useHistory } from "react-router";
 import { apiService } from "../../actions/services";
 
 const GlobalContext = React.createContext({});
@@ -14,17 +10,19 @@ export const GPRoute = ({ component: Component, ...rest }) => {
   // ---------- //
   // Which character creator/generator is chosen ( base , template , custom )
   const [generator, setGenerator] = React.useState<string>("");
-
   // State Hooks For Character Editor ( Base ) //
   // ---------- //
   // Charecter Name State Hook ( Note: this state will also update the name over the 3D model. )
-  const [characterName, setCharacterName] = React.useState<string>("Character Name");
+  const [characterName, setCharacterName] =
+    React.useState<string>("Character Name");
   // Categories State and Loaded Hooks
   const [categories, setCategories] = React.useState([]);
-  const [categoriesLoaded, setCategoriesLoaded] = React.useState<boolean>(false);
-  // Collections State and Loaded Hooks 
+  const [categoriesLoaded, setCategoriesLoaded] =
+    React.useState<boolean>(false);
+  // Collections State and Loaded Hooks
   const [collection, setCollection] = React.useState([]);
-  const [collectionLoaded, setCollectionLoaded] = React.useState<boolean>(false);
+  const [collectionLoaded, setCollectionLoaded] =
+    React.useState<boolean>(false);
   // Bones State and Loaded Hooks
   const [bones, setBones] = React.useState([]);
   const [bonesLoaded, setBonesLoaded] = React.useState<boolean>(false);
@@ -36,26 +34,12 @@ export const GPRoute = ({ component: Component, ...rest }) => {
     name: "head",
     sideIndicator: false,
   });
-
   // 3D Model Content State Hooks ( Scene, Nodes, Materials, Animations e.t.c ) //
-  const [modelNodes, setModelNodes] = React.useState<object>(Object);
-  const [template, setTemplate] = React.useState<object>(Object);
-
-  const { nodes, scene, materials, animations }: any = useGLTF(
-    "/models/TestModel.glb"
-  );
-
-  console.log(nodes);
-
-  React.useEffect(() => {
-    if (nodes) {
-      setModelNodes(nodes);
-      apiService.fetchTemplate().then((res) => {
-        setTemplate(res);
-        console.log(res);
-      })
-    }
-  }, [nodes]);
+  const [templateInfo, setTemplateInfo] = React.useState();
+  const [nodes, setNodes] = React.useState<object>(Object);
+  const [scene, setScene] = React.useState<object>(Object);
+  const [materials, setMaterials] = React.useState<object>(Object);
+  const [animations, setAnimations] = React.useState<object>(Object);
 
   return (
     <Route
@@ -64,20 +48,29 @@ export const GPRoute = ({ component: Component, ...rest }) => {
         return (
           <GlobalContext.Provider
             value={{
+              // ----- General Use State Hooks ------ //
               generator,
               setGenerator,
-              // --------- //
+              // ----- Navigation Categories / State Hooks ----- //
               categories,
               setCategories,
               categoriesLoaded,
               setCategoriesLoaded,
               category,
               setCategory,
-              modelNodes,
-              setModelNodes,
               characterName,
               setCharacterName,
-              scene
+              // ----- 3D Model Content State Hooks ----- //
+              templateInfo,
+              setTemplateInfo,
+              nodes,
+              setNodes,
+              scene,
+              setScene,
+              materials,
+              setMaterials,
+              animations,
+              setAnimations,
             }}
           >
             <Component {...props} />
@@ -87,5 +80,4 @@ export const GPRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
-useGLTF.preload("/models/CharacterCreatorBaseModels.glb");
 export const useGlobalState = () => React.useContext(GlobalContext);

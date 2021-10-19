@@ -15,7 +15,7 @@ import { XyzPositionSlider } from './sliders';
 export function MorphUpdateTools() {
     const {
         scene,
-        modelNodes
+        nodes
       }: any = useGlobalState();
     const [morph, setMorph] = React.useState<number>(0);
     const [morph2, setMorph2] = React.useState<number>(0);
@@ -104,13 +104,13 @@ export function MorphUpdateTools() {
     <AccordionDetails>
     <Scrollbars className="scroll">
       <Typography>
-          {modelNodes &&
-            Object.keys(modelNodes).map((keyName, i) => {
-              if (modelNodes[keyName].type === "Bone") {
+          {nodes &&
+            Object.keys(nodes).map((keyName, i) => {
+              if (nodes[keyName].type === "Bone") {
                 return (
                   <XyzPositionSlider
-                    position={modelNodes[keyName]?.position}
-                    name={modelNodes[keyName]?.name}
+                    position={nodes[keyName]?.position}
+                    name={nodes[keyName]?.name}
                     key={i}
                   />
                 );

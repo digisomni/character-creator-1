@@ -17,7 +17,7 @@ export default function MeshSelector() {
     setCategory,
   }: any = useGlobalState();
 
-  console.log(categories);
+  //console.log(categories);
 
   const changeCategory = (category: any) => {
     setCategory({

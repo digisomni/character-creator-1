@@ -42,12 +42,13 @@ export default function Scene(props: any) {
         />
       </Box>
       <Canvas>
-        { /* <Text
+        {/*
+        <Text
           color="#efefef"
           anchorX="center"
           anchorY="middle"
           position={[0, 2, 0]}
-        > 
+        >
           {characterName}
         </Text>
         */}

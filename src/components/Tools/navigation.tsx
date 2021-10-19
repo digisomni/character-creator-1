@@ -20,7 +20,7 @@ import { apiService } from "../../actions/services";
 export default function ToolsNavigation() {
   const { categories, category, setCategory }: any = useGlobalState();
 
-  console.log(categories);
+  //console.log(categories);
 
   const changeCategory = (category: any) => {
     setCategory({
@@ -31,28 +31,28 @@ export default function ToolsNavigation() {
 
   return (
     <List className="tools-navigation-wrap">
-      <ListItem key={"settings1"}>
+      <ListItem key={"body"}>
         <Tooltip title="Body" arrow placement="right">
           <Avatar className="avatar active">
             <SettingsAccessibilityIcon />
           </Avatar>
         </Tooltip>
       </ListItem>
-      <ListItem key={"settings2"}>
+      <ListItem key={"download"}>
         <Tooltip title="Download" arrow placement="right">
           <Avatar className="avatar">
             <DownloadIcon />
           </Avatar>
         </Tooltip>
       </ListItem>
-      <ListItem key={"settings2"}>
-        <Tooltip title="Lights" arrow placement="right">
+      <ListItem key={"scene"}>
+        <Tooltip title="Scene" arrow placement="right">
           <Avatar className="avatar">
             <LightbulbIcon />
           </Avatar>
         </Tooltip>
       </ListItem>
-      <ListItem key={"settings3"}>
+      <ListItem key={"Settings"}>
         <Tooltip title="Settings" arrow placement="right">
           <Avatar className="avatar">
             <SettingsIcon />

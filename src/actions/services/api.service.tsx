@@ -17,15 +17,15 @@ import standElements from "../../library/stands.json";
 import poseElements from "../../library/poses.json";
 import bones from "../../library/bones.json";
 
-// Fetch Template Info for Basketball Player
-import BasketballPlayerTemplate from "../../data/template/player.json";
+// Fetch Templates Info for Basketball Players
+import BasketballPlayerTemplates from "../../data/template/player.json";
 
 export const apiService = {
   fetchCaterories,
   fetchElements,
   fetchBones,
   filterElements,
-  fetchTemplate
+  fetchTemplate,
 };
 
 async function fetchCaterories(editor: any) {
@@ -36,8 +36,10 @@ async function fetchCaterories(editor: any) {
   }
 }
 
-async function fetchTemplate() {
-  return BasketballPlayerTemplate;
+async function fetchTemplate(id: any) {
+  const response = await axios.get("/api/template/basketball-players.json");
+  const filtered = response.data.filter((templates) => templates.id === id);
+  return filtered[0];
 }
 
 async function fetchBones() {

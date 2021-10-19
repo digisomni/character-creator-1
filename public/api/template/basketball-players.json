@@ -1,0 +1,46 @@
+[{
+    "id": "basketball-player-template-uid",
+    "name": "Basketball Player",
+    "file": "/models/templates/basketball_player.glb",
+    "editable": {
+      "morphEditor": {
+        "body": {
+          "morphKeys": ["Chubby", "Buff", "Lanky"],
+          "morphTargets": [
+            "Shirt1",
+            "Shirt2", 
+            "Pants1",
+            "Pants2",
+            "CC_Base_Eye009_1",
+            "CC_Base_Eye009_2",
+            "CC_Base_Eye009_3",
+            "CC_Base_Eye009_4",
+            "CC_Base_Eye009_5"
+          ]
+        },
+        "head": {
+          "morphKeys": [
+            "Nose1",
+            "Nose2",       
+            "Nose3",
+            "Mouth1",
+            "Mouth2",
+            "Mouth3",
+            "Face1",
+            "Face2",
+            "Face3",
+            "Eye1",
+            "Eye2",
+            "Eye3"
+          ],
+          "morphTargets": ["CC_Base_Eye009_1"]
+        }
+      },
+      "poseEditor": {
+        "body": {
+          
+        }
+      }
+    }
+  }]
+  
