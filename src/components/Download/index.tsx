@@ -64,7 +64,7 @@ export default function DownloadCharacter() {
     setAnchorEl(null);
   };
   return (
-    <Box className="download-wrap">
+    <div className="download-wrap">
       <Button
         id="download-button"
         className="download-button"
@@ -97,6 +97,6 @@ export default function DownloadCharacter() {
           <DownloadIcon /> Download GLTF
         </MenuItem>
       </StyledMenu>
-    </Box>
+    </div>
   );
 }

@@ -4,7 +4,9 @@
 import axios from "axios";
 
 // IMPORT LOCAL DATA FOR TESTING
-import CategoryData from "../../library/category.json";
+import BaseCategories from "../../data/base/categories.json";
+import TemplateCategories from "../../data/template/categories.json";
+
 import headElements from "../../library/heads.json";
 import handElements from "../../library/hands.json";
 import armElements from "../../library/arm.json";
@@ -15,15 +17,27 @@ import standElements from "../../library/stands.json";
 import poseElements from "../../library/poses.json";
 import bones from "../../library/bones.json";
 
+// Fetch Template Info for Basketball Player
+import BasketballPlayerTemplate from "../../data/template/player.json";
+
 export const apiService = {
   fetchCaterories,
   fetchElements,
   fetchBones,
   filterElements,
+  fetchTemplate
 };
 
-async function fetchCaterories() {
-  return CategoryData;
+async function fetchCaterories(editor: any) {
+  if (editor && editor === "base") {
+    return BaseCategories;
+  } else if (editor && editor === "template") {
+    return TemplateCategories;
+  }
+}
+
+async function fetchTemplate() {
+  return BasketballPlayerTemplate;
 }
 
 async function fetchBones() {

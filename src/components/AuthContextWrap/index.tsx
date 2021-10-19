@@ -14,7 +14,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   // Categories State and Loaded Hooks
   const [categories, setCategories] = useState([]);
   const [categoriesLoaded, setCategoriesLoaded] = useState(false);
-  // Collections State and Loaded Hooks
+  // Collections State and Loaded Hooks 
   const [collection, setCollection] = useState([]);
   const [collectionLoaded, setCollectionLoaded] = useState([]);
   // Bones State and Loaded Hooks
@@ -52,7 +52,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
 
   // Loading Categories
   useEffect(() => {
-    apiService.fetchCaterories().then((res: any) => {
+    apiService.fetchCaterories("base").then((res: any) => {
       setCategories(res);
       setCategoriesLoaded(true);
     });
