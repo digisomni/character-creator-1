@@ -18,9 +18,14 @@ export default function Template(props: any) {
   }: any = useGlobalState();
 
   const [loadedModel, setLoadedModel] = React.useState<any>();
-  threeService.loadModel("/models/templates/basketball_player.glb").then((res) => {
-    console.log(res);
-  });
+  React.useEffect(() => {
+    threeService.loadModel("/models/templates/basketball_player.glb","gltf/glb").then((model: any) => {
+      if(model) {
+        setScene(model.scene);
+        setAnimations(model.animations);
+      }
+    })
+}, []);
   return (
     <React.Fragment>
       <Tools />
@@ -28,4 +33,4 @@ export default function Template(props: any) {
     </React.Fragment>
   );
 }
-//useGLTF.preload("/models/templates/basketball_player.glb");
+useGLTF.preload("/models/templates/basketball_player.glb");

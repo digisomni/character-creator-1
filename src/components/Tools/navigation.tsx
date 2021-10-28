@@ -6,6 +6,7 @@ import ListItem from "@mui/material/ListItem";
 import Avatar from "@mui/material/Avatar";
 import { Scrollbars } from "react-custom-scrollbars";
 import DownloadIcon from '@mui/icons-material/Download';
+import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 
 // Importing icons from MUI
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -18,7 +19,7 @@ import { useGlobalState } from "../GlobalProvider";
 import { apiService } from "../../actions/services";
 
 export default function ToolsNavigation() {
-  const { categories, category, setCategory }: any = useGlobalState();
+  const { categories, category, setCategory, navigation, setNavigation }: any = useGlobalState();
 
   //console.log(categories);
 
@@ -31,30 +32,30 @@ export default function ToolsNavigation() {
 
   return (
     <List className="tools-navigation-wrap">
-      <ListItem key={"body"}>
+      <ListItem key={"body"} onClick={() => {setNavigation("body")}}>
         <Tooltip title="Body" arrow placement="right">
-          <Avatar className="avatar active">
+          <Avatar className={navigation && navigation === "body" ? "avatar active" : "avatar"}>
             <SettingsAccessibilityIcon />
           </Avatar>
         </Tooltip>
       </ListItem>
-      <ListItem key={"download"}>
+      <ListItem key={"download"} onClick={() => {setNavigation("download")}}>
         <Tooltip title="Download" arrow placement="right">
-          <Avatar className="avatar">
+          <Avatar className={navigation && navigation === "download" ? "avatar active" : "avatar"}>
             <DownloadIcon />
           </Avatar>
         </Tooltip>
       </ListItem>
-      <ListItem key={"scene"}>
+      <ListItem key={"scene"} onClick={() => {setNavigation("scene")}}>
         <Tooltip title="Scene" arrow placement="right">
-          <Avatar className="avatar">
-            <LightbulbIcon />
+          <Avatar className={navigation && navigation === "scene" ? "avatar active" : "avatar"}>
+            <VideoCameraFrontIcon />
           </Avatar>
         </Tooltip>
       </ListItem>
-      <ListItem key={"Settings"}>
+      <ListItem key={"Settings"} onClick={() => {setNavigation("settings")}}>
         <Tooltip title="Settings" arrow placement="right">
-          <Avatar className="avatar">
+          <Avatar className={navigation && navigation === "settings" ? "avatar active" : "avatar"}>
             <SettingsIcon />
           </Avatar>
         </Tooltip>

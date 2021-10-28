@@ -18,11 +18,11 @@ import { threeService } from "../../actions/services";
 
 export default function Scene(props: any) {
   const { editor, wrapClass }: any = props;
-  const { characterName, modelNodes, scene }: any = useGlobalState();
+  const { characterName, modelNodes, scene , randomize }: any = useGlobalState();
   const [cvpSlider, setCvpSlider] = React.useState<number>(1);
   return (
     <div className={`scene-wrap ${wrapClass && wrapClass}`}>
-      <Box className="scene-tools">
+      <div className="scene-tools">
         <Slider
           sx={{
             '& input[type="range"]': {
@@ -40,9 +40,9 @@ export default function Scene(props: any) {
           aria-label="Camera Vertical Position Slider"
           className="slider"
         />
-      </Box>
+      </div>
       <Canvas>
-        {/*
+        { /*
         <Text
           color="#efefef"
           anchorX="center"
@@ -51,7 +51,7 @@ export default function Scene(props: any) {
         >
           {characterName}
         </Text>
-        */}
+        */ }
         <color attach="background" args={["#0f1321"]} />
         <gridHelper
           args={[200, 100, "#002459", "#002459"]}

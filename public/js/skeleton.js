@@ -662,7 +662,7 @@ document.body.onresize = function() {
   camera.aspect = ((6 / 5) * window.innerWidth) / window.innerHeight; //aspect ratio update
   camera.updateProjectionMatrix();
   renderer.domElement.style.position = -(1 / 5) * window.innerWidth;
-};
+}; 
 
 var link = document.createElement("a");
 link.style.display = "none";

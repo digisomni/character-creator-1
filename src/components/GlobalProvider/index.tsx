@@ -10,6 +10,7 @@ export const GPRoute = ({ component: Component, ...rest }) => {
   // ---------- //
   // Which character creator/generator is chosen ( base , template , custom )
   const [generator, setGenerator] = React.useState<string>("");
+  const [navigation, setNavigation] = React.useState<string>("body");
   // State Hooks For Character Editor ( Base ) //
   // ---------- //
   // Charecter Name State Hook ( Note: this state will also update the name over the 3D model. )
@@ -35,11 +36,13 @@ export const GPRoute = ({ component: Component, ...rest }) => {
     sideIndicator: false,
   });
   // 3D Model Content State Hooks ( Scene, Nodes, Materials, Animations e.t.c ) //
-  const [templateInfo, setTemplateInfo] = React.useState();
   const [nodes, setNodes] = React.useState<object>(Object);
   const [scene, setScene] = React.useState<object>(Object);
   const [materials, setMaterials] = React.useState<object>(Object);
   const [animations, setAnimations] = React.useState<object>(Object);
+  // States Hooks used in template editor //
+  const [templateInfo, setTemplateInfo] = React.useState<object>();
+  const [randomize, setRandomize] = React.useState<boolean>(false);
 
   return (
     <Route
@@ -51,6 +54,8 @@ export const GPRoute = ({ component: Component, ...rest }) => {
               // ----- General Use State Hooks ------ //
               generator,
               setGenerator,
+              navigation,
+              setNavigation,
               // ----- Navigation Categories / State Hooks ----- //
               categories,
               setCategories,
@@ -61,8 +66,6 @@ export const GPRoute = ({ component: Component, ...rest }) => {
               characterName,
               setCharacterName,
               // ----- 3D Model Content State Hooks ----- //
-              templateInfo,
-              setTemplateInfo,
               nodes,
               setNodes,
               scene,
@@ -71,6 +74,11 @@ export const GPRoute = ({ component: Component, ...rest }) => {
               setMaterials,
               animations,
               setAnimations,
+              // ----- Template State Hooks ----- //
+              templateInfo,
+              setTemplateInfo,
+              randomize,
+              setRandomize,
             }}
           >
             <Component {...props} />

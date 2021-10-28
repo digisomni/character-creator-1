@@ -1,48 +1,118 @@
 import axios from "axios";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import { saveAs } from "file-saver";
 import { useGLTF } from "@react-three/drei";
 
 export const threeService = {
   changeBonePosition,
-  changeMorphInfluence,
+  updateMeshShape,
   loadModel,
+  loadRandomizedModel,
+  download,
 };
 
-async function loadModel(file:any) {
-  const loader = new GLTFLoader();
+async function loadModel(file: any, type: any) {
+  if (type && type === "gltf/glb") {
+    const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
+    loader.setDRACOLoader(dracoLoader);
+    return loader.loadAsync(file, function (progress) {
+      return progress;
+    });
+  }
+}
 
-// Optional: Provide a DRACOLoader instance to decode compressed mesh data
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-loader.setDRACOLoader( dracoLoader );
+async function loadRandomizedModel(file: any, type: any, variables: any) {
+  console.log(variables);
+  // Random full body shapes
+  const model = loadModel(file, type).then((mod: any) => {
+    console.log(mod);
+    variables.shapes.body.keys.map((key: any) => {
+      const randomValue = Math.random();
+      variables.shapes.body.targets.map((target: any) => {
+        var mesh = mod.scene.getObjectByName(target);
+        const index = mesh.morphTargetDictionary[key.name];
+        if (index !== undefined) {
+          mesh.morphTargetInfluences[index] = randomValue;
+        }
+      });
+    });
+    // Random Head Shapes ( Face, Nose, Mouth e.t.c. )
+    variables.shapes.head.keys.map((key: any) => {
+      const randomValue = Math.random();
+      variables.shapes.head.targets.map((target: any) => {
+        var mesh = mod.scene.getObjectByName(target);
+        const index = mesh.morphTargetDictionary[key.name];
+        if (index !== undefined) {
+          mesh.morphTargetInfluences[index] = randomValue;
+        }
+      });
+    });
+    mod.scene.updateMatrixWorld(true);
+    return mod;
+  });
+  return Promise.all([model]);
+}
 
-// Load a glTF resource
-loader.load(
-	// resource URL
-	'/models/templates/player.glb',
-	// called when the resource is loaded
-	function ( gltf ) {
+async function download(scene: any, fileName: any, screenshot: any) {
+  const exporter = new GLTFExporter();
 
-		return gltf;
+  //save(new Blob([text], { type: "text/plain" }), filename);
+  const link = document.createElement("a");
+  link.style.display = "none";
+  document.body.appendChild(link);
 
-	},
-	// called while loading is progressing
-	function ( xhr ) {
+  function save(blob, filename) {
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+  }
 
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-    return null;
+  function saveString(text, filename) {
+    save(new Blob([text], { type: "text/plain" }), filename);
+  }
 
-	},
-	// called when loading has errors
-	function ( error ) {
+  function saveArrayBuffer(buffer, filename) {
+    save(new Blob([buffer], { type: "application/octet-stream" }), filename);
+  }
 
-		console.log( 'An error happened' );
-    return null;
+  var options = {
+    trs: false,
+    onlyVisible: true,
+    truncateDrawRange: true,
+    binary: true,
+    forcePowerOfTwoTextures: false,
+    maxTextureSize: 4096 || Infinity,
+  };
+  exporter.parse(
+    scene,
+    function (result) {
+      if (result instanceof ArrayBuffer) {
+        saveArrayBuffer(result, "AAA_scene.glb");
+      } else {
+        var output = JSON.stringify(result, null, 2);
+        console.log(output);
+        saveString(output, "AAA_scene.gltf");
+      }
+    },
+    options
+  );
+}
 
-	}
-);
+async function updateMeshShape(key: any, value: any, scene: any, targets: any) {
+  if (key?.name && targets && value) {
+    targets.map((target: any) => {
+      var mesh = scene.getObjectByName(target);
+      const index = mesh.morphTargetDictionary[key.name];
+      if (index !== undefined) {
+        mesh.morphTargetInfluences[index] = value;
+      }
+    });
+  }
 }
 
 async function changeBonePosition(
@@ -66,21 +136,5 @@ async function changeBonePosition(
       default:
     }
     return value;
-  }
-}
-
-async function changeMorphInfluence(
-  name: any,
-  value: any,
-  scene: any,
-  singular: any,
-  array: any
-) {
-  if (name && singular) {
-    var mesh = scene.getObjectByName(name);
-    const index = mesh.morphTargetDictionary[array];
-    if (index !== undefined) {
-      mesh.morphTargetInfluences[index] = value;
-    }
   }
 }

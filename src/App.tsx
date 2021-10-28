@@ -21,6 +21,7 @@ import Template from "./pages/Template";
 import Base from "./pages/Base";
 import Custom from "./pages/Custom";
 import Navigation from "./components/Navigation";
+import Generator from "./pages/Generator";
 
 export default function App() {
   return (
@@ -32,12 +33,14 @@ export default function App() {
 
             <GPRoute path="/" exact component={Start} />
             <GPRoute path="/base" exact component={Base} />
-            <GPRoute path="/template" exact component={Template} />
             <GPRoute path="/template/:id" exact component={Template} />
             <GPRoute path="/custom" exact component={Custom} />
-
+            
             <PrivateRoute path="/editor" exact component={CharecterEditor} />
             <GPRoute path="/character-editor" exact component={CharacterEditor} />
+
+            { /* For testing purposes only */ }
+            <GPRoute path="/generator/:id" exact component={Generator} />
 
           </Switch>
         </Router>
