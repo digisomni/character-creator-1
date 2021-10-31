@@ -1,0 +1,48 @@
+[
+  {
+    "id": "baller-uid",
+    "name": "Basketball Player",
+    "file": "/models/templates/basketball_player.glb",
+    "format": "gltf/glb",
+    "editor": {
+      "shapes": {
+          "body": {
+            "keys": [
+              { "name": "Chubby", "range": [0,1] },
+              { "name": "Buff", "range": [0,1] },
+              { "name": "Lanky", "range": [0,1] }
+            ],
+            "targets": [
+              "Shirt1",
+              "Shirt2",
+              "Pants1",
+              "Pants2",
+              "CC_Base_Eye009_1",
+              "CC_Base_Eye009_2",
+              "CC_Base_Eye009_3",
+              "CC_Base_Eye009_4",
+              "CC_Base_Eye009_5"
+            ]
+          },
+          "head": {
+            "keys": [
+              { "name": "Nose1", "range": [0,1] },
+              { "name": "Nose2", "range": [0,1] },
+              { "name": "Nose3", "range": [0,1] },
+              { "name": "Mouth1", "range": [0,1] },
+              { "name": "Mouth2", "range": [0,1] },
+              { "name": "Mouth3", "range": [0,1] },
+              { "name": "Face1", "range": [0,1] },
+              { "name": "Face2", "range": [0,1] },
+              { "name": "Face3", "range": [0,1] },
+              { "name": "Eye1", "range": [0,1] },
+              { "name": "Eye2", "range": [0,1] },
+              { "name": "Eye3", "range": [0,1] }
+            ],
+            "targets": ["CC_Base_Eye009_1"]
+          }
+      },
+      "poses": {}
+    }
+  }
+]

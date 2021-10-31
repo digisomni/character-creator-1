@@ -1,18 +1,31 @@
 import * as React from "react";
-import { apiService } from "../../actions/services";
+import { apiService, threeService } from "../../actions/services";
 import { useGlobalState } from "../../components/GlobalProvider";
 import Scene from "../../components/Scene";
 import Tools from "../../components/Tools";
+import { useGLTF, useProgress } from "@react-three/drei";
 
-export default function Template() {
-  const { setCategories, setCategoriesLoaded }: any = useGlobalState();
-  // Loading Categories
+export default function Template(props: any) {
+  const {
+    setCategories,
+    setCategoriesLoaded,
+    setNodes,
+    setScene,
+    setMaterials,
+    setAnimations,
+    setTemplateInfo,
+    templateInfo,
+  }: any = useGlobalState();
+
+  const [loadedModel, setLoadedModel] = React.useState<any>();
   React.useEffect(() => {
-    apiService.fetchCaterories('template').then((res) => {
-      setCategories(res);
-      setCategoriesLoaded(true);
-    });
-  },[]);
+    threeService.loadModel("/models/templates/basketball_player.glb","gltf/glb").then((model: any) => {
+      if(model) {
+        setScene(model.scene);
+        setAnimations(model.animations);
+      }
+    })
+}, []);
   return (
     <React.Fragment>
       <Tools />
@@ -20,3 +33,4 @@ export default function Template() {
     </React.Fragment>
   );
 }
+useGLTF.preload("/models/templates/basketball_player.glb");

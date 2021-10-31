@@ -1,126 +1,109 @@
-import * as React from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 import { Slider } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Scrollbars } from "react-custom-scrollbars";
+import { Button } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { Box } from "@mui/system";
 import "./style.scss";
 
 import { useGlobalState } from "../GlobalProvider";
 import { threeService } from "../../actions/services";
-import { XyzPositionSlider } from './sliders';
+import { XyzPositionSlider } from "./sliders";
 
-export function MorphUpdateTools() {
-    const {
-        scene,
-        modelNodes
-      }: any = useGlobalState();
-    const [morph, setMorph] = React.useState<number>(0);
-    const [morph2, setMorph2] = React.useState<number>(0);
-    const [morph3, setMorph3] = React.useState<number>(0);
-    const updateMorph = (value, key) => {
-      setMorph(value);
-      threeService.changeMorphInfluence("Shirt2", value, scene, true, key);
-      threeService.changeMorphInfluence("Pants2", value, scene, true, key);
-      threeService.changeMorphInfluence("CC_Base_Eye009_1", value, scene, true, key);
-      threeService.changeMorphInfluence("CC_Base_Eye009_2", value, scene, true, key);
-      threeService.changeMorphInfluence("CC_Base_Eye009_3", value, scene, true, key);
-      threeService.changeMorphInfluence("CC_Base_Eye009_4", value, scene, true, key);
-      threeService.changeMorphInfluence("CC_Base_Eye009_5", value, scene, true, key);
-    };
+export function EditorTools(props: any) {
+  const { scene, nodes, templateInfo }: any = useGlobalState();
+  const [shapekeys, setShapeKeys] = React.useState<any>();
+  const [shapeTargets, setShapeTargets] = React.useState<any>();
+  React.useEffect(() => {
+    setShapeKeys(templateInfo?.editor?.shapes?.body?.keys);
+    setShapeTargets(templateInfo?.editor?.shapes?.body?.targets);
+    console.log(scene);
+  }, [templateInfo?.editor?.shapes?.body?.keys]);
+  const updateShape = (key: any, value: any, targets: any) => {
+    threeService.updateMeshShape(key,value,scene,targets);
+  };
   return (
     <>
-<Accordion className="options-box">
-    <AccordionSummary
-      expandIcon={<ExpandMoreIcon />}
-      aria-controls="panel1a-content"
-      id="panel1a-header"
-    >
-      <Typography>Shape Editor</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-      <Typography>
-          Chubby
-      <Slider
-            className="slider"
-            size="small"
-            min={0}
-            max={1}
-            step={0.05}
-            onChange={(e: any) => {
-              updateMorph(e.target.value, "Chubby");
-            }}
-          />
-          Buff
-      <Slider
-            className="slider"
-            size="small"
-            min={0}
-            max={1}
-            step={0.01}
-            onChange={(e: any) => {
-              updateMorph(e.target.value, "Buff");
-            }}
-          />
-          Lanky
-      <Slider
-            className="slider"
-            size="small"
-            min={0}
-            max={1}
-            step={0.01}
-            onChange={(e: any) => {
-              updateMorph(e.target.value, "Lanky");
-            }}
-          />
-      </Typography>
-    </AccordionDetails>
-  </Accordion>
-  <Accordion className="options-box">
-    <AccordionSummary
-      expandIcon={<ExpandMoreIcon />}
-      aria-controls="panel1a-content"
-      id="panel1a-header"
-    >
-      <Typography>Skin Editor</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-    <Scrollbars className="scroll">
-      <Typography>
-      </Typography>
-      </Scrollbars>
-    </AccordionDetails>
-  </Accordion>
-  <Accordion className="options-box">
-    <AccordionSummary
-      expandIcon={<ExpandMoreIcon />}
-      aria-controls="panel1a-content"
-      id="panel1a-header"
-    >
-      <Typography>Position Editor</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-    <Scrollbars className="scroll">
-      <Typography>
-          {modelNodes &&
-            Object.keys(modelNodes).map((keyName, i) => {
-              if (modelNodes[keyName].type === "Bone") {
+      <Accordion className="options-box">
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Shape Editor</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            {shapekeys &&
+              shapekeys.length > 0 &&
+              shapekeys.map((key: any) => {
+                console.log(key);
                 return (
-                  <XyzPositionSlider
-                    position={modelNodes[keyName]?.position}
-                    name={modelNodes[keyName]?.name}
-                    key={i}
-                  />
+                  <React.Fragment>
+                    {key.name}
+                    <Slider
+                      className="slider"
+                      size="small"
+                      min={0}
+                      max={1}
+                      step={0.05}
+                      onChange={(e: any) => {
+                        updateShape(key,e.target.value,shapeTargets);
+                      }}
+                    />
+                  </React.Fragment>
                 );
-              }
-            })}
-      </Typography>
-      </Scrollbars>
-    </AccordionDetails>
-  </Accordion>
+              })}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion className="options-box">
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Position Editor</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Scrollbars className="scroll">
+            <Typography>
+              {nodes &&
+                Object.keys(nodes).map((keyName, i) => {
+                  if (nodes[keyName].type === "Bone") {
+                    return (
+                      <XyzPositionSlider
+                        position={nodes[keyName]?.position}
+                        name={nodes[keyName]?.name}
+                        key={i}
+                      />
+                    );
+                  }
+                })}
+            </Typography>
+          </Scrollbars>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion className="options-box">
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Skin Editor</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Scrollbars className="scroll">
+            <Typography></Typography>
+          </Scrollbars>
+        </AccordionDetails>
+      </Accordion>
     </>
-  
   );
 }
