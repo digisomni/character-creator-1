@@ -1,18 +1,14 @@
-import React, { Component, useState, Suspense } from "react";
+import React, { Suspense } from "react";
 import "./assets/styles/main.scss";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
 } from "react-router-dom";
 import { BrowserView, MobileView } from "react-device-detect";
-import CharecterEditor from "./components/CharacterEditor";
+import CharacterEditor from "./components/CharacterEditor";
 import { PrivateRoute } from "./components/AuthContextWrap";
 
 import CharacterEditor from "./pages/CharacterEditor";
-
-// Importing Route Component with Global Variables
 import { GPRoute } from "./components/GlobalProvider";
 
 // Importing Pages
@@ -35,8 +31,7 @@ export default function App() {
             <GPRoute path="/base" exact component={Base} />
             <GPRoute path="/template/:id" exact component={Template} />
             <GPRoute path="/custom" exact component={Custom} />
-            
-            <PrivateRoute path="/editor" exact component={CharecterEditor} />
+            <PrivateRoute path="/editor" exact component={CharacterEditor} />
             <GPRoute path="/character-editor" exact component={CharacterEditor} />
 
             { /* For testing purposes only */ }
@@ -48,8 +43,6 @@ export default function App() {
       <MobileView>
         <div className="abs top left smartphone">
           <div className="fullScreenMessage">
-            Sorry, this content is currently unavailable on mobile... ^2000",
-            "Come back soon for updates!
           </div>
         </div>
       </MobileView>

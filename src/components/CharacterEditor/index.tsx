@@ -5,7 +5,7 @@ import Typed from "react-typed";
 import MeshSelector from "../Editor";
 import DownloadCharacter from "../Download";
 
-export default function CharecterEditor() {
+export default function CharacterEditor() {
   return (
     <div>
       <BrowserView>

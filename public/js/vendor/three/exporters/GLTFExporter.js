@@ -829,13 +829,13 @@ THREE.GLTFExporter.prototype = {
 			}
 
 			// pbrMetallicRoughness.baseColorFactor
-			var color = [ 1, 0, 0, 1 ];
+			/*var color = [ 1, 0, 0, 1 ]; // Red color
 
 			if ( ! equalArray( color, [ 1, 1, 1, 1 ] ) ) {
 
-				gltfMaterial.pbrMetallicRoughness.baseColorFactor = color;
+				gltfMaterial.pbrMetallicRoughness.baseColorFactor = color; // Apply red color
 
-			}
+			}*/
 
 			if ( material.isMeshStandardMaterial ) {
 
