@@ -6,6 +6,7 @@ import ListItem from "@mui/material/ListItem";
 import Avatar from "@mui/material/Avatar";
 import { Scrollbars } from "react-custom-scrollbars";
 import DownloadIcon from '@mui/icons-material/Download';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 
 // Importing icons from MUI
@@ -36,6 +37,13 @@ export default function ToolsNavigation() {
         <Tooltip title="Body" arrow placement="right">
           <Avatar className={navigation && navigation === "body" ? "avatar active" : "avatar"}>
             <SettingsAccessibilityIcon />
+          </Avatar>
+        </Tooltip>
+      </ListItem>
+      <ListItem key={"randomize"} onClick={() => {setNavigation("randomize")}}>
+        <Tooltip title="Randomize" arrow placement="right">
+          <Avatar className={navigation && navigation === "randomize" ? "avatar active" : "avatar"}>
+            <AutorenewIcon />
           </Avatar>
         </Tooltip>
       </ListItem>

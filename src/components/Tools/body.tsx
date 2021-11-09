@@ -1,21 +1,12 @@
-import * as React from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import { Slider } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Scrollbars } from "react-custom-scrollbars";
-import { Button } from "@mui/material";
+import * as React from "react";
+import Typography from "@mui/material/Typography";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Box } from "@mui/system";
 import "./style.scss";
 
 import { useGlobalState } from "../GlobalProvider";
-import { threeService } from "../../actions/services";
-import { XyzPositionSlider } from './sliders';
-import { EditorTools } from './tools';
+import { TemplateEditorTools } from "./tools";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -25,7 +16,6 @@ interface TabPanelProps {
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -35,9 +25,9 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <React.Fragment>
           <Typography>{children}</Typography>
-        </Box>
+        </React.Fragment>
       )}
     </div>
   );
@@ -51,7 +41,6 @@ function a11yProps(index: number) {
 }
 
 export function TemplateBodyTools() {
-
   const {
     modelNodes,
     scene,
@@ -67,45 +56,34 @@ export function TemplateBodyTools() {
   };
 
   return (
-    <div className="tools">
-        <Box>
-          <Button onClick={() => !randomize && setRandomize(true)} className="">
-            Random
-          </Button>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs"
-              className="tabs"
-            >
-              <Tab
-                label="Full Body"
-                {...a11yProps(0)}
-                className="options-tab"
-              />
-              <Tab label="Head" {...a11yProps(1)} className="options-tab" />
-              <Tab label="Torso" {...a11yProps(2)} className="options-tab" />
-              <Tab label="Arms" {...a11yProps(3)} className="options-tab" />
-              <Tab label="Legs" {...a11yProps(4)} className="options-tab" />
-            </Tabs>
-          </Box>
-          <TabPanel value={value} index={0}>
-            <EditorTools category="body" />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-          <EditorTools category="head" />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-          <EditorTools category="torso" />
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-          <EditorTools category="arms" />
-          </TabPanel>
-          <TabPanel value={value} index={4}>
-          <EditorTools category="legs" />
-          </TabPanel>
-        </Box>
-      </div>
+    <React.Fragment>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        aria-label="basic tabs"
+        className="tabs"
+      >
+        <Tab label="Full Body" {...a11yProps(0)} className="options-tab" />
+        <Tab label="Head" {...a11yProps(1)} className="options-tab" />
+        <Tab label="Torso" {...a11yProps(2)} className="options-tab" />
+        <Tab label="Arms" {...a11yProps(3)} className="options-tab" />
+        <Tab label="Legs" {...a11yProps(4)} className="options-tab" />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        <TemplateEditorTools category="body" />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <TemplateEditorTools category="head" />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <TemplateEditorTools category="torso" />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <TemplateEditorTools category="arms" />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <TemplateEditorTools category="legs" />
+      </TabPanel>
+    </React.Fragment>
   );
 }
