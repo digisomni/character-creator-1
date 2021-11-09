@@ -6,28 +6,70 @@ import Typography from "@mui/material/Typography";
 import { Slider } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Scrollbars } from "react-custom-scrollbars";
-import { Button } from "@mui/material";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { Box } from "@mui/system";
 import "./style.scss";
 
 import { useGlobalState } from "../GlobalProvider";
 import { threeService } from "../../actions/services";
 import { XyzPositionSlider } from "./sliders";
 
-export function EditorTools(props: any) {
-  const { scene, nodes, templateInfo }: any = useGlobalState();
-  const [shapekeys, setShapeKeys] = React.useState<any>();
-  const [shapeTargets, setShapeTargets] = React.useState<any>();
-  React.useEffect(() => {
-    setShapeKeys(templateInfo?.editor?.shapes?.body?.keys);
-    setShapeTargets(templateInfo?.editor?.shapes?.body?.targets);
-    console.log(scene);
-  }, [templateInfo?.editor?.shapes?.body?.keys]);
-  const updateShape = (key: any, value: any, targets: any) => {
-    threeService.updateMeshShape(key,value,scene,targets);
+function ChangeMorphValueSlider(props: any) {
+  const { scene, randomize }: any = useGlobalState();
+  const [currValue, setCurrValue] = React.useState();
+  const updateMorphValue = (value: any) => {
+    threeService.updateMorphValue(props.keyName, value, scene, props.targets).then(() => {
+      setCurrValue(value);
+    });
   };
+  React.useEffect(() => {
+    if (props.keyName && props.targets && scene) {
+      threeService
+        .getMorphValue(props.keyName, scene, props.targets[0])
+        .then((res) => {
+          console.log(res);
+          setCurrValue(res);
+        });
+    }
+  }, [props.targets && props.keyName && scene && randomize]);
+  return (
+    <>
+      <Typography color="#FFFFFF">{props.keyName}</Typography>
+      {currValue && (
+        <Slider
+          className="slider"
+          size="small"
+          value={currValue}
+          min={0.1}
+          max={1}
+          step={0.05}
+          onChange={(e: any) => {
+            updateMorphValue(e.target.value);
+          }}
+        />
+      )}
+    </>
+  );
+}
+
+export function TemplateEditorTools(props: any) {
+  const { scene, nodes, templateInfo }: any = useGlobalState();
+  const [shapeKeys, setShapeKeys] = React.useState<any>();
+  const [shapeTargets, setShapeTargets] = React.useState<any>();
+  const [shapeKeyDefaultValues, setShapeKeyDefaultValues] =
+    React.useState<any>();
+
+  const { category } = props;
+  React.useEffect(() => {
+    if (templateInfo?.editor?.shapes && category) {
+      const shapes = templateInfo?.editor?.shapes.filter(
+        (shape) => shape.mesh === category
+      )[0];
+      if (shapes?.keys) {
+        setShapeKeys(shapes.keys);
+        setShapeTargets(shapes.targets);
+      }
+    }
+  }, [templateInfo?.editor?.shapes && category && scene]);
+
   return (
     <>
       <Accordion className="options-box">
@@ -40,24 +82,16 @@ export function EditorTools(props: any) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {shapekeys &&
-              shapekeys.length > 0 &&
-              shapekeys.map((key: any) => {
-                console.log(key);
+            {shapeKeys &&
+              shapeKeys.length > 0 &&
+              shapeKeys.map((key: any, index) => {
+                console.log(key.name);
                 return (
-                  <React.Fragment>
-                    {key.name}
-                    <Slider
-                      className="slider"
-                      size="small"
-                      min={0}
-                      max={1}
-                      step={0.05}
-                      onChange={(e: any) => {
-                        updateShape(key,e.target.value,shapeTargets);
-                      }}
-                    />
-                  </React.Fragment>
+                  <ChangeMorphValueSlider
+                    key={index}
+                    keyName={key.name}
+                    targets={shapeTargets}
+                  />
                 );
               })}
           </Typography>

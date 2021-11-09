@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as THREE from "three";
 
 export function BaseModel(props: any) {
   const { nodes, scene }: any = props;
@@ -31,6 +32,15 @@ export function BaseModel(props: any) {
 
 export function TemplateModel(props: any) {
   console.log("Template Loaded Once");
+  const { scene }: any = props;
+  return (
+    <mesh position={[0, 0.02, 0]}>
+      <primitive object={scene} />
+    </mesh>
+  );
+}
+
+export function TemplateSnapshotModel(props: any) {
   const { scene }: any = props;
   return (
     <mesh position={[0, 0.02, 0]}>

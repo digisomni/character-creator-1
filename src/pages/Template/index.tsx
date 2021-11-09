@@ -3,34 +3,61 @@ import { apiService, threeService } from "../../actions/services";
 import { useGlobalState } from "../../components/GlobalProvider";
 import Scene from "../../components/Scene";
 import Tools from "../../components/Tools";
-import { useGLTF, useProgress } from "@react-three/drei";
+import RandomizeButton from "../../components/Tools/randomize";
 
 export default function Template(props: any) {
   const {
-    setCategories,
-    setCategoriesLoaded,
-    setNodes,
     setScene,
-    setMaterials,
-    setAnimations,
+    scene,
+    model,
+    setModel,
     setTemplateInfo,
     templateInfo,
+    randomize, 
+    setRandomize
   }: any = useGlobalState();
-
-  const [loadedModel, setLoadedModel] = React.useState<any>();
   React.useEffect(() => {
-    threeService.loadModel("/models/templates/basketball_player.glb","gltf/glb").then((model: any) => {
-      if(model) {
-        setScene(model.scene);
-        setAnimations(model.animations);
-      }
-    })
-}, []);
+    apiService.fetchTemplate(props.match.params.id).then((res) => {
+      setTemplateInfo(res);
+    });
+  }, [props.match.params.id]);
+
+  React.useEffect(() => {
+    // console.log("Template Information Response: ", templateInfo);
+    if (templateInfo?.file && templateInfo?.format && templateInfo?.editor) {
+      threeService
+        .loadModel(
+          templateInfo?.file,
+          templateInfo?.format
+        )
+        .then((model: any) => {
+          if (model.scene) {
+            setScene(model.scene);
+            setModel(model);
+            //setAnimations(animations);
+            console.log("Template Loaded Once", model);
+          }
+        });
+    }
+  }, [templateInfo?.file]);
+
+  React.useEffect(() => {
+    if(templateInfo?.editor && model) {
+    threeService.randomize(scene, templateInfo?.editor).then(() => {
+      setRandomize(false);
+      threeService.addTextToMesh(model.scene, "Shirt2", ("0" + Math.floor(Math.random() * 99)).slice(-2));
+    });
+  }
+  }, [!randomize]);
+
   return (
     <React.Fragment>
       <Tools />
-      <Scene editor="template" wrapClass="template" />
+      <RandomizeButton />
+      <Scene
+        editor="generator"
+        wrapClass="generator"
+      />
     </React.Fragment>
   );
 }
-useGLTF.preload("/models/templates/basketball_player.glb");

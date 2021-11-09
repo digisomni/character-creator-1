@@ -38,19 +38,25 @@
     }
   }
   .tools {
-    padding: 0 16px;
+    padding: 22px 16px;
     width: 293px !important;
     top: 0;
     left: 80px;
     height: 100%;
     position: absolute !important;
     box-sizing: border-box;
+    .download-button {
+      width: 100%;
+      margin-bottom: 12px;
+    }
     .tabs {
       button {
         color: #ffffff;
         font-size: 10px;
         min-width: auto;
         padding: 4px 8px;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
       }
     }
   }
@@ -152,6 +158,13 @@
   }
 }
 
+.randomize-button {
+  position: absolute !important;
+  top: 90px;
+  right: 28px;
+  z-index: 100;
+}
+
 .MuiTabs-indicator {
   height: 10px !important;
   background: #007cce; /* Old browsers */
@@ -210,7 +223,7 @@
 }
 
 .options-tab {
-  margin-top: 4px 3px;
+  margin-top: 0;
   color: $NavMainBackgroundColor2 !important;
   opacity: 0.6;
   &.Mui-selected {
@@ -219,7 +232,7 @@
 }
 
 .css-1kt0o6l {
-  margin-top: 2px;
+  margin-top: -16px;
   border: 0;
   border-bottom: 0px solid $NavMainBackgroundColor !important;
 }

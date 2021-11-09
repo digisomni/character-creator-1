@@ -8,12 +8,13 @@ import { DownloadTools } from "./download";
 
 export default function Tools(props: any) {
   const { navigation }: any = useGlobalState();
-
   return (
     <div className="tools-wrap">
       <ToolsNavigation />
-      {navigation && navigation === "body" && <TemplateBodyTools />}
-      {navigation && navigation === "download" && <DownloadTools />}
+      <div className="tools">
+        {navigation && navigation === "body" && <TemplateBodyTools />}
+        {navigation && navigation === "download" && <DownloadTools />}
+      </div>
     </div>
   );
 }
